@@ -1,0 +1,55 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Product Details";
+}
+<input type="hidden" value="@Model.Product.ProductId"/>
+ <h2 class="text-center mt-4"> Product Details</h2>
+<div class="card mb-5 p-4 justify-content-center mx-auto col-md-8 col-lg-6">
+    <div id="carouselExample" class="carousel slide col-12 col-lg-6 mx-auto" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @for (int i = 0; i < Model.Product.Photos.Count(); i++)
+            {
+                <div class="carousel-item @(i == 0 ? "active" :  "")" style="max-height: 50vh">
+                    <img class="d-block img-fluid" src="\@Model.Product.Photos.ToList()[i].Path">
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <hr />
+    <h4>@Model.Product.Name</h4>
+    <h5 class="text-primary"><strong>R @Model.Product.Price</strong></h5>
+    <h5 class="fw-bold">Description</h5>
+    <p>@Model.Product.Description</p>
+    <strong>Categories</strong>
+    <div class="d-flex">
+        @foreach(ProductCategory pCategory in Model.Product.ProductCategories)
+        {
+             <span>|</span><span class="px-2 mb-4">@pCategory.Category.CategoryName</span>
+        }
+        <span>|</span>
+    </div>
+    <div class="justify-content-between">
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-link" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Product.ProductId">Edit</a>
+            <span>|</span>
+            <a class="btn btn-link" onclick="return confirm('Are you sure you want to delete @Model.Product.Name ?')" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Product.ProductId">Delete</a>
+        }
+        else
+        {
+            
+                <input type="submit" class="btn btn-success" id="addtocart" value="Add to cart">
+
+        }
+
+    </div>
+
+</div>

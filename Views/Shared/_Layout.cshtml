@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <!--  Bootstrap -->
+    <link rel="stylesheet" asp-href-include="/lib/bootstrap/css/bootstrap.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" asp-href-include="/lib/font-awesome/css/all.min.css" />
+    <!-- Custom CSS-->
+    <link rel="stylesheet" asp-href-include="/css/custom.css"/>
+
+    <title>Hoodkid - @ViewBag.Title</title>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-white text-decoration-none " asp-controller="Home" asp-action="Index">
+                <img class="rounded-circle" src="~/images/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+                    Hoodkid
+                </a>
+
+               <div class="navbar-toggler border-dark d-flex">
+                    <div class="d-flex d-md-none my-auto">
+                        <a class="nav-link mx-2">
+                            <span>
+                                <i class="fa-solid fa-heart"></i>
+                            </span>
+                        </a>
+                        <a class="nav-link me-5" asp-action="Cart" asp-controller="ShoppingCart">
+                            <span class="position-absolute">
+                                <i class="fa-shopping-cart fa-solid">
+                                    <vc:cart></vc:cart>
+                                </i>
+
+                            </span>
+                        </a>
+
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#MyNavBar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+               </div>
+           
+            <div class="collapse navbar-collapse" id="MyNavBar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link">Help Center</a></li> 
+                </ul>
+                <ul class="navbar-nav navbar-md-right align-baseline">
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-link">
+                            <a class="" asp-conroller="Account" asp-Action="ManageAccount" >Hello, @User.Identity.Name</a>
+                        </li>
+                        @if(User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link"
+                               asp-controller="Admin" asp-action="Index">Admin</a>
+                            </li>
+                            
+                        }
+                        <li class="nav-item">
+                            <form asp-controller="Account" asp-action="Logout" method="post">
+
+                                <button class="btn btn-link nav-link" type="submit">Log Out</button>
+
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Register" asp-controller="Account">Register</a>
+                            
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Login" asp-controller="Account">Log in</a>
+                        </li>
+                    }
+
+                    <li class="nav-item"><a class="nav-link">Orders</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">My Account</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item">Orders</a>
+                            <a class="dropdown-item">Returns</a>
+                            <hr class="dropdown-divider"/>
+                            <a class="dropdown-item">Personal Details</a>
+                            <a class="dropdown-item">Address Book</a>
+                            <a class="dropdown-item">Invoices</a>
+                            <a class="dropdown-item">Produc Reviews</a>
+                            <a class="dropdown-item">Newsletter Subcriptions</a>
+                            <hr class="dropdown-divider" />
+                            <a class="dropdown-item">Credit & Refunds</a>
+                            <a class="dropdown-item">Redeem Gift Voucher</a>
+                        </div>
+                    </li>
+                    <div class=" d-none d-md-flex ">
+                        <li class="nav-item">
+                            <a class="nav-link">
+                                <span>
+                                    <i class="fa-solid fa-heart"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" asp-action="Cart" asp-controller="ShoppingCart">
+                            <span class="position-absolute">
+                                    <i class="fa-shopping-cart fa-solid">
+                                        <vc:cart></vc:cart>
+                                    </i>
+
+                                </span>
+                            </a>
+                        </li>
+
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <vc:breadcrumb></vc:breadcrumb>
+
+    </div>
+
+        @RenderBody()
+ 
+    <footer class="bg-dark text-light footer p-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h2>HoodKid</h2>
+                </div>
+                <div class="col-md-3">
+                    <h5>About Us</h5>
+                    <p>
+                        GeeksforGeeks is a leading platform that provides
+                        computer science resources and coding challenges for
+                        programmers and technology enthusiasts along with
+                        interview and exam preparations for upcoming aspirants.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>Email: info@example.com</li>
+                        <li>Phone: +27 76 9934 </li>
+                        <li>Address: 123 Street, City, Country</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Follow Us</h5>
+                    <ul class="list-inline footer-links">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>© 2024 Thoriso Joel Molebatsi. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <ul class="list-inline footer-links">
+                        <li class="list-inline-item">
+                            <a href="#" class="text-white">
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-white">
+                                Terms of Service
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-white">
+                                Sitemap
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @* @RenderSection("Scripts", required: false) *@
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+﻿.dropdown:hover .dropdown-menu {
+    display :block;
+}
+.dropdown-divider{
+    margin-left: 1.25rem;
+    margin-right: 2.25rem;
+}
+
+/* Decorations */

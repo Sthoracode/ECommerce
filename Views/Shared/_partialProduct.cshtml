@@ -1,0 +1,44 @@
+﻿@model ProductViewModel
+
+<div class="text-danger" asp-validation-summary="All"></div>
+<div class="mb-3">
+    <label asp-for="Product.Name" class="form-label"></label>
+    <input asp-for="Product.Name" class="form-control" />
+    <div><span asp-validation-for="Product.Name" class="text-danger"></span></div>
+</div>
+<div class="mb-3">
+    <label asp-for="Product.Description" class="form-label"></label>
+    <input asp-for="Product.Description" class="form-control" />
+    <div><span asp-validation-for="Product.Description" class="text-danger"></span></div>
+</div>
+       
+<div class="mb-3">
+    <label asp-for="Product.Color" class="form-label"></label>
+    <input asp-for="Product.Color" class="form-control" />
+    <div><span asp-validation-for="Product.Color" class="text-danger"></span></div>
+</div>
+<div class="mb-3">
+    <label asp-for="Product.Size" class="form-label"></label>
+    <input asp-for="Product.Size" class="form-control" />
+    <div><span asp-validation-for="Product.Size" class="text-danger"></span></div>
+</div>
+<div class="mb-3">
+    <label asp-for="Product.Price" class="form-label"></label>
+    <input asp-for="Product.Price" class="form-control" />
+    <div><span asp-validation-for="Product.Price" class="text-danger"></span></div>
+</div>
+<div class="mb-3">
+    <label asp-for="Product.QOH" class="form-label"></label>
+    <input asp-for="Product.QOH" class="form-control" />
+    <div><span asp-validation-for="Product.QOH" class="text-danger"></span></div>
+</div>
+ <div>
+    @if (ViewBag.Categories != null)
+    {
+    <label asp-for="Categories" class="form-label"></label>
+    <select class="form-select dropdown" asp-for="Categories" placeholder="Choose a category" asp-items="@ViewBag.Categories" multiple="multiple">
+                    
+        </select>
+    }
+    <span asp-validation-for="Product.ProductCategories" />
+</div>

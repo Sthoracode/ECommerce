@@ -1,0 +1,17 @@
+﻿@model List<string>
+
+<nav aria-label="breadcrumb container mt-5">
+    <ol class="breadcrumb container">
+        @if(Model[0] != null)
+        {
+            @if(Model[1] != "Home")
+            {
+                <li class="breadcrumb-item text-secondary"><a href="@Model[0]">Back </a></li>
+
+
+            }
+            <li class="breadcrumb-item active" aria-current="page">@Model[1] / @Model[2]</li>
+            
+        }
+    </ol>
+</nav>

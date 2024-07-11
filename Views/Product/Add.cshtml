@@ -1,0 +1,36 @@
+﻿@model ProductViewModel
+
+@{
+    Layout = "_AdminLayout";
+}
+<div class="col-8 col-lg-6 mx-auto my-5">
+    <h2>Add product</h2>
+    <!-- HTML form allowing multiple file uploads -->
+    <form method="post" enctype="multipart/form-data" asp-controller="Product" asp-action="Add">
+        <partial name="_partialProduct" model="@Model"/>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Photos"></label>
+            <input class="form-control" asp-for="Photos" >
+            <div><span asp-validation-for="Photos" class="text-danger"></span></div>
+        </div>
+        <br />
+        <button class="btn btn-dark" type="submit">Save</button>
+    </form>
+
+</div>
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $('option').mousedown(function (e) {
+        e.preventDefault();
+        var originalScrollTop = $(this).parent().scrollTop();
+        console.log(originalScrollTop);
+        $(this).prop('selected', $(this).prop('selected') ? false : true);
+        var self = this;
+        $(this).parent().focus();
+        setTimeout(function () {
+            $(self).parent().scrollTop(originalScrollTop);
+        }, 0);
+
+        return false;
+    });
+</script>

@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "_Layout";
+}
+<nav class="navbar navbar-expand-md navbar-fixed-top bg-light-subtle navbar-light">
+    <div class="container">
+        <ul class="nav navbar-nav mx-auto d-none d-sm-none d-md-flex">
+            <li class="nav-item">
+                <a class="nav-link active" asp-controller="Admin" asp-action="Product">Product management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Website administration</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">User management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Order management</a>
+            </li>
+        </ul>
+       
+
+
+    </div>
+</nav>
+<div class="container">
+    @RenderBody()
+
+</div>

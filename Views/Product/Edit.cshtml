@@ -1,0 +1,51 @@
+﻿@model ProductViewModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="col-8 col-lg-6 mx-auto my-5">
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="col-10 mx-auto alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fa-solid fa-check"></i><strong>@TempData["AlertMessage"]</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+    }
+    <h2>Edit Product</h2>
+    <form >
+        <partial name="_partialProduct" model="@Model" />
+
+        <label class="mt-3">Photos</label>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Photo</th>
+                <th>Path</th>
+                <th>Action</th>
+            </tr>
+            @foreach(Photo photo in Model.Product.Photos)
+            {
+                <tr>
+                    <td>@photo.PhotoId</td>
+                    <td><img class="img-thumbnail" style="width:66px" src="\@photo.Path" /></td>
+                    <td>@photo.Path</td>
+                    @if(Model.Product.Photos.Count() > 1)
+                    {
+                        <td>
+                            <a onclick="return confirm('Are you sure you want to delete @photo.Path ?')" class="btn btn-link" asp-action="Delete" asp-controller="Photo" asp-route-id="@photo.PhotoId">Delete</a>
+                        </td>
+                        
+                    }
+                </tr>
+            }
+            
+        </table>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Photos"></label>
+            <input class="form-control" asp-for="Photos">
+            <div><span asp-validation-for="Photos" class="text-danger"></span></div>
+        </div>
+        <button class="btn btn-dark" type="submit">Save</button>
+    </form>
+
+</div>
